@@ -1,0 +1,2 @@
+[console_scripts]
+mldslls = mldslls.__init__:main
