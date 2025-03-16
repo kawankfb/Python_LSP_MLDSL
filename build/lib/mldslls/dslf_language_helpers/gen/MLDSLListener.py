@@ -494,6 +494,15 @@ class MLDSLListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by MLDSLParser#string.
+    def enterString(self, ctx:MLDSLParser.StringContext):
+        pass
+
+    # Exit a parse tree produced by MLDSLParser#string.
+    def exitString(self, ctx:MLDSLParser.StringContext):
+        pass
+
+
     # Enter a parse tree produced by MLDSLParser#metric.
     def enterMetric(self, ctx:MLDSLParser.MetricContext):
         pass

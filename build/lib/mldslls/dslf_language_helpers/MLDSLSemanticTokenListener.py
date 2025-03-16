@@ -24,15 +24,226 @@ class MLDSLSemanticListener(MLDSLListener):
 
     # Exit a parse tree produced by MLDSLParser#preprocess.
     def exitPreprocess(self, ctx:MLDSLParser.PreprocessContext):
+        # Add preprocess keyword to symbol table
         self.symbol_table.insert(
             SymbolTable.Record(
                 ctx.getChild(0).getText(),
                 self.get_current_scope(),
-                'integer',
-                5,
+                'keyword',
+                None,
                 None,
                 ctx.getChild(0).symbol.line,
                 ctx.getChild(0).symbol.column,
                 len(ctx.getChild(0).getText())
+            )
+        )
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(1).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(1).symbol.line,
+                ctx.getChild(1).symbol.column,
+                len(ctx.getChild(1).getText())
+            )
+        )
+
+    def exitTrain(self, ctx):
+        # Add preprocess keyword to symbol table
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(1).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(1).symbol.line,
+                ctx.getChild(1).symbol.column,
+                len(ctx.getChild(1).getText())
+            )
+        )
+
+    def exitLoad(self, ctx):
+        # Add preprocess keyword to symbol table
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+
+    def exitLoad_dataset(self, ctx):
+        # Add preprocess keyword to symbol table
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+
+
+    def exitLoad_model(self, ctx):
+        # Add preprocess keyword to symbol table
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+
+    def exitSplit(self, ctx):
+        # Add preprocess keyword to symbol table
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(1).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(1).symbol.line,
+                ctx.getChild(1).symbol.column,
+                len(ctx.getChild(1).getText())
+            )
+        )
+
+    def exitEvaluate(self, ctx):
+        # Add preprocess keyword to symbol table
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(1).getText(),
+                self.get_current_scope(),
+                'keyword',
+                None,
+                None,
+                ctx.getChild(1).symbol.line,
+                ctx.getChild(1).symbol.column,
+                len(ctx.getChild(1).getText())
+            )
+        )
+
+
+    def exitId(self, ctx:MLDSLParser.IdContext):
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'property',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+
+    def exitString(self, ctx:MLDSLParser.StringContext):
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getChild(0).getText(),
+                self.get_current_scope(),
+                'string',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+
+    def exitParameter(self, ctx:MLDSLParser.ParameterContext):
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                ctx.getText(),
+                self.get_current_scope(),
+                'parameter',
+                None,
+                None,
+                ctx.getChild(0).getChild(0).symbol.line,
+                ctx.getChild(0).getChild(0).symbol.column,
+                len(ctx.getChild(0).getText())
+            )
+        )
+
+    def exitPython_code(self, ctx:MLDSLParser.Python_codeContext):
+        # Add preprocess keyword to symbol table
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                "@py_start",
+                self.get_current_scope(),
+                'decorator',
+                None,
+                None,
+                ctx.getChild(0).symbol.line,
+                ctx.getChild(0).symbol.column,
+                9
+            )
+        )
+        new_lines_count = ctx.getChild(0).getText().count('\n')
+        self.symbol_table.insert(
+            SymbolTable.Record(
+                "@py_end",
+                self.get_current_scope(),
+                'decorator',
+                None,
+                None,
+                ctx.getChild(0).symbol.line+ new_lines_count,
+                0,
+                7
             )
         )

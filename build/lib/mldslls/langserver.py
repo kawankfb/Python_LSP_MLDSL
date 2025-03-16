@@ -300,7 +300,7 @@ class LangServer:
         # server_capabilities_temp = {"definitionProvider": True,"documentHighlightProvider":True}
         server_capabilities_temp = {"semanticTokensProvider": {
             "legend":{
-                "tokenTypes":['macro','function','keyword'],
+                "tokenTypes":['keyword','string','property','parameter','comment','decorator'],
                 "tokenModifiers":['static','async']
             },
             "full":True

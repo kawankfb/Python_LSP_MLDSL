@@ -279,6 +279,11 @@ class MLDSLVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by MLDSLParser#string.
+    def visitString(self, ctx:MLDSLParser.StringContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by MLDSLParser#metric.
     def visitMetric(self, ctx:MLDSLParser.MetricContext):
         return self.visitChildren(ctx)

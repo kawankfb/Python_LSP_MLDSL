@@ -31,12 +31,12 @@ set: 'set' var_id ':' (value);
 // Parser rules for Preprocess
 preprocess: 'preprocess' 'dataset' dataset_name? ('using' preprocess_method)? ('on' columns)?;
 preprocess_method: method_name parameters?;
-method_name: ID;
+method_name: id;
 
 // Parser rules for Split
 split: 'split' 'dataset' dataset_name? ('using' split_method)? ('on' columns)?;
 split_method: split_method_name parameters?;
-split_method_name: ID;
+split_method_name: id;
 
 // Parser rules for Train
 train: 'train' 'model' model_name? ('on' dataset_name)? ('using' model)?;
@@ -70,23 +70,24 @@ python_code: CODE;
 parameters: '(' parameter (',' parameter)* ')';
 parameter: id ':' value;
 
-value: id | STRING | number | range | list;
+value: id | string | number | range | list;
 range: number 'to' number ('step' number)?;
 list: list_element (',' list_element)*;
-list_element: number | ID | STRING;
+list_element: number | id | string;
 number: INT | FLOAT;
 
-dataset_name: ID;
-model_name: ID;
-file_path: STRING;
-sql_config: STRING;
-url: STRING;
-detail: ID;
-var_id: ID;
+dataset_name: id;
+model_name: id;
+file_path: string;
+sql_config: string;
+url: string;
+detail: id;
+var_id: id;
 columns: column (',' column)*;
-column: STRING;
-record: STRING;
-metric: ID;
+column: string;
+record: string;
+string: STRING;
+metric: id;
 id: ID;
 
 // Lexical rules
@@ -101,5 +102,5 @@ fragment LETTER: [a-zA-Z_];
 fragment ESC: '\\"' | '\\\\';
 
 WS: [ \t\r]+ -> skip;
-COMMENT: ('//'.*?'\n' | '/*'.*?'*/') -> skip;
+COMMENT: ('//'.*?'\n' | '/*'.*?'*/') -> channel(HIDDEN);
 NEWLINE: ('\n' | '\r\n' | '\r') -> skip;
